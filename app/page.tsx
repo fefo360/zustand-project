@@ -12,7 +12,8 @@ export default function Home() {
     itemList,
   } = useStore();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     addItem(inputValue);
     setInputValue("");
   };
@@ -20,12 +21,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Zustand Test App</h1>
-      <input
-        className="border border-1"
-        onChange={(e) => setInputValue(e.target.value)}
-        value={inputValue}
-      />
-      <button onClick={handleSubmit}>Add Item </button>
+      <form onSubmit={handleSubmit}>
+        <input
+          className="border border-1"
+          onChange={(e) => setInputValue(e.target.value)}
+          value={inputValue}
+        />
+      </form>
       <ul>
         {itemList.map((item, index) => {
           return <li key={index}>{item}</li>;
